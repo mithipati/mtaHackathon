@@ -1,0 +1,130 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>LostAndFound</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <header class="app-bar promote-layer">
+      <div class="app-bar-container">
+        <button class="menu"><img src="images/hamburger.svg" alt="Menu"></button>
+        <section class="app-bar-actions">
+        <!-- Put App Bar Buttons Here -->
+        <!-- e.g <button><i class="icon icon-star"></i></button> -->
+        </section>
+      </div>
+    </header>
+
+    <main>
+      <div class='main-container'>
+        <div class='main-text'>
+          <div class='page' data-page='1'>
+            <h1 class='welcome-text'>Lost<strong>It</strong></h1>
+            <h3 class='sub-text nav-link'><a class='nav-link nav-button start-button' href="">Find your stuff <i class='ion-chevron-right'></i></a></h3>
+          </div>
+          <div class='page' data-page='2'>
+            <div id='vis'></div>
+            <div class='status-text'>
+              <h2 id='status'></h2><i class='nav-button next-button ion-chevron-down'></i>
+            </div>
+          </div>
+          <div class='page' data-page='3'>
+            <div class='card-container'>
+              <div class='card-title'>Category</div>
+              <div class='card-sub'>
+                <a href=''>
+                  Subcategory
+                </a>
+              </div>
+              <div class='card-stat'>... ^ +1</div>
+              <div class='card-sub'>
+                <a href=''>
+                  Subcategory
+                </a>
+              </div>
+              <div class='card-stat'>... ^ +1</div>
+              <div class='card-sub'>
+                <a href=''>
+                  Subcategory
+                </a>
+              </div>
+              <div class='card-stat'>... ^ +1</div>
+              <div class='card-sub'>
+                <a href=''>
+                  Subcategory
+                </a>
+              </div>
+              <div class='card-stat'>... ^ +1</div>
+              <div class='card-sub'>
+                <a href=''>
+                  Subcategory
+                </a>
+              </div>
+              <div class='card-stat'>... ^ +1</div>
+              <div class='card-info'>* All changes are as of last hour</div>
+            </div>
+            <!-- <p><a class='nav-link nav-button' href="">go back</a></p> -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <script src="scripts/pre.js"></script>
+        <script src="scripts/bubble.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
