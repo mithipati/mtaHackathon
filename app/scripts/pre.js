@@ -3,26 +3,15 @@ $(document).ready(function() {
 
 	$main.on('click', '.nav-button', function(e) {
 		e.preventDefault();
-		var $currentPage = $(e.target).closest('.page'),
-			pageNumber = $currentPage.data('page');
-			
-		$currentPage.hide();
-
-		if ($currentPage.data('back')) {
-			setPage(pageNumber - 1);
-		} else {
-			setPage(pageNumber + 1);
-		}
-	});
-
-	$('#getStarted').on('click', function(e) {
-		e.preventDefault();
-		var $currentPage = $('.page');
-
-		$currentPage.hide();
 		setPage(2);
 	});
 
+	$main.on('click', '.view-card', function(e) {
+		e.preventDefault();
+		setPage(3);
+	});
+
+	$('.card-container').addClass('animated bounceInUp');
 	$('.nav-link').addClass('animated bounceInLeft');
 
 	function setPage(newPage) {
@@ -35,8 +24,22 @@ $(document).ready(function() {
 	}
 
 	function renderPage(page) {
-		var $currentPage = $('.page[data-page="'+page+'"]');
-		$currentPage.fadeIn('slow');
+		var $targetPage = $('.page[data-page="'+page+'"]'),
+			$previousPage;
+
+		if (page !== 1) {
+			$previousPage = $('.page[data-page="'+(page-1)+'"]');
+			$previousPage.hide();
+		}
+
+		switch (page) {
+			case 2:
+				break;
+			default:
+				break;
+		}
+
+		$targetPage.fadeIn('slow');
 	}
 
 	setPage(1);
