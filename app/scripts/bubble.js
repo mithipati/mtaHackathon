@@ -191,20 +191,12 @@ var bubbles = function() {
       return id === idValue(d);
     });
     if (id.length > 0 && id != 2) {
-    	$('#status').html(id + '?')
-    				.addClass('animated fadeInDown');
-
-    	$('.next-button').addClass('animated fadeInDown');
-    	// $('.next-button').delay(1000).fadeIn('slow');
-      	// d3.select('#status')
-      	// 		.hide();
-      	// 		d3.select('#status')
-      	// 		.html('<h3>You lost a <span class=\'active\'>' + id + '</span></h3>')
-      	// 		.show();
+    	$('#status').html(id + '?');
+      $('.next-button').fadeIn();
+      $('.next-button').addClass('animated fadeInDown');
     } else {
-    	$('#status').html('What did you lose?')
-    				.addClass('animated bounceInLeft');
-      // return d3.select('#status').html('What did you loose?');
+      $('#status').html('What did you lose?');
+      $('.next-button').hide();
     }
   };
   mouseover = function(d) {
