@@ -22,7 +22,11 @@ $(document).ready(function() {
 	$main.on('click', '.view-card', function(e) {
 		e.preventDefault();
 		var $targetPage = $('.page[data-page="3"]'),
-			$previousPage = $('.page[data-page="2"]');
+			$previousPage = $('.page[data-page="2"]'),
+			category = decodeURIComponent(window.location.hash);
+
+		populateCard(category);
+
 		$('#vis').addClass('animated fadeOutLeft');
 		$('.status-text').addClass('animated fadeOutLeft');
 		$('#vis').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
@@ -71,6 +75,11 @@ $(document).ready(function() {
 		}
 
 		$targetPage.fadeIn('slow');
+	}
+
+	function populateCard(category) {
+		var $container = $('.subcategory-container');
+		
 	}
 
 	function dismissCard() {

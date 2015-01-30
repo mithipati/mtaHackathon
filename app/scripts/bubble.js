@@ -227,8 +227,9 @@ $(function() {
   var plot = bubbles();
   display = function(data) {
     // return plotData('#vis', data, plot);
+    console.log(data);
     var newData = formatCategories(data['categories']);
-    // console.log(newData);
+    console.log(newData);
     d3.select('#vis').datum(newData).call(plot);
     // d3.select('#vis').datum(data).call(plot);
   };
