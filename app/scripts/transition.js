@@ -48,14 +48,6 @@ $(document).ready(function() {
 	$('.card-container').addClass('animated bounceInRight');
 	$('.nav-link').addClass('animated bounceInLeft');
 
-	$.ajax({
-		// url: 'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/category/Currency',
-		url: 'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest',
-		dataType: 'json'
-	}).success(function(data) {
-		console.log(data);
-	});
-
 	function setPage(newPage, isBack) {
 		if (newPage === 1) {
 			window.location.hash = '';

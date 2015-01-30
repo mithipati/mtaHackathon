@@ -1,21 +1,3 @@
-// var diameter = 600;
-
-// var svg = d3.select('#vis').append('svg')
-// 			.attr('width', diameter)
-// 			.attr('height', diameter);
-
-// var bubble = d3.layout.pack()
-// 				.size([diameter, diameter])
-// 				padding(3)
-// 				.value(function(d) {
-// 					return d.size;
-// 				});
-
-// var bubbles;
-// var Bubbles, root, texts;
-// var d3 = new d3();
-// root = typeof exports !== 'undefined' && exports !== null ? exports : this;
-
 var bubbles = function() {
   var chart, clear, click, collide, collisionPadding, connectEvents, data, force, gravity, hashchange, height, idValue, jitter, label, margin, maxRadius, minCollisionRadius, mouseout, mouseover, node, rScale, rValue, textValue, tick, transformData, update, updateActive, updateLabels, updateNodes, width;
   width = 1440;
@@ -29,7 +11,7 @@ var bubbles = function() {
     bottom: 0,
     left: 0
   };
-  maxRadius = 65;
+  maxRadius = 125;
   rScale = d3.scale.sqrt().range([0, maxRadius]);
   rValue = function(d) {
     return parseInt(d.count);
@@ -120,9 +102,9 @@ var bubbles = function() {
       return rValue(d);
     });
     label.style('font-size', function(d) {
-      return Math.max(8, rScale(rValue(d) / 2)) + 'px';
+      return Math.max(6, rScale(rValue(d) / 6)) + 'px';
     }).style('width', function(d) {
-      return 2.5 * rScale(rValue(d)) + 'px';
+      return 3.5 * rScale(rValue(d)) + 'px';
     });
     label.append('span').text(function(d) {
       return textValue(d);
@@ -245,8 +227,52 @@ $(function() {
   var plot = bubbles();
   display = function(data) {
     // return plotData('#vis', data, plot);
-    d3.select('#vis').datum(data).call(plot);
+    var newData = formatCategories(data['categories']);
+    // console.log(newData);
+    d3.select('#vis').datum(newData).call(plot);
+    // d3.select('#vis').datum(data).call(plot);
   };
+
+  function formatCategories(categories) {
+    var result = [],
+      name,
+      count;
+    for (var i = 0; i < categories.length; i++) {
+      name = categories[i]['categoryName'];
+      count = countSubcategories(categories[i]['subCategories']);
+
+      switch (name) {
+        case 'Carry Bag / Luggage':
+          name = 'Luggage';
+          break;
+        case 'Cell Phone/Telephone/Communication Device':
+          name = 'Cell Phones';
+          break;
+        default:
+          break;
+      }
+
+      result.push({
+        name: name,
+        count: count
+      });
+    }
+    return result;
+  }
+
+  function countSubcategories(subCategories) {
+    var count = 0,
+      subCategoryCount;
+    for (var i = 0; i < subCategories.length; i++) {
+      subCategoryCount = parseInt(subCategories[i]['subCategoryCount']);
+      count += subCategoryCount;
+    }
+    return count;
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   // key = decodeURIComponent(location.search).replace('?', '');
   // text = texts.filter(function(t) {
   //   return t.key === key;
@@ -264,20 +290,6 @@ $(function() {
   //   location.search = encodeURIComponent(key);
   // });
   // d3.select('#book-title').html(text.name);
-  return d3.csv('data/alice.csv', display);
+  return d3.json('http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest', display);
+  // return d3.csv('data/alice.csv', display);
 });
-
-
-// var sampleSVG = d3.select("#vis")
-//         .append("svg")
-//         .attr("width", 100)
-//         .attr("height", 100);    
-
-//     sampleSVG.append("circle")
-//         .style("stroke", "gray")
-//         .style("fill", "white")
-//         .attr("r", 40)
-//         .attr("cx", 50)
-//         .attr("cy", 50)
-//         .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-        // .on("mouseout", function(){d3.select(this).style("fill", "white");});
