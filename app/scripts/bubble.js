@@ -405,33 +405,6 @@ $(function() {
     $main.delegate('#user-transport', 'change', renderDateSection);
     $main.delegate('#user-travel-date', 'input', renderSubmitButton);
 
-
-    // $main.on('input', '#user-name', function(e) {
-    //     var $targetInput = $('.form-section[data-section="2"]');
-
-    //     if (formTimeout) { 
-    //         clearTimeout(formTimeout); 
-    //     }
-
-    //     formTimeout = setTimeout(function() {
-    //         $targetInput.fadeIn('slow');
-    //         $targetInput.find('input').focus();
-    //         formTimeout = undefined;
-    //     }, 700);
-    // });
-
-    // $main.on('input', '#user-phone', function(e) {
-        
-    // });
-
-    // $main.on('input', '#user-email', function(e) {
-        
-    // });
-
-    // $main.on('input', '#user-zip', function(e) {
-        
-    // });
-
     $main.on('click', '.submit-claim', function(e) {
         e.preventDefault();
         var $targetPage = $('.page[data-page="5"]'),
