@@ -37,8 +37,7 @@
             <div id="bg"></div>
             <div id="overlay"></div>
             <section id="banner">
-              <div class="inner">
-                
+              <div class="inner"> 
                 <h1 class='welcome-text'><strong>MTA</strong> Found<strong>It</strong></h1>
                 <h3 class='sub-text nav-link'><a class='nav-link nav-button start-button' href="">Find your lost belongings here <i class='ion-chevron-right'></i></a></h3>
               </div>
@@ -47,7 +46,9 @@
           <div class='page' data-page='2'>
             <div id='vis'></div>
             <div class='status-text'>
-              <h2 id='status'></h2><i class=' nav-link view-card next-button ion-chevron-right'></i>
+              <div class='view-card'>
+                <h2 id='status'></h2><i class='nav-link next-button ion-chevron-right'></i>
+              </div>
             </div>
           </div>
           <div class='page' data-page='3'>
@@ -65,20 +66,35 @@
           <div class='page' data-page='4'>
             <div id='user-form'>
               <p class='user-form-text'>
-                I, <input id='user-name' placeholder='Full Name' />, have lost: <span id='user-item'></span>.
-                You can contact me via cell at <input id='user-phone' placeholder='XXX-XXX-XXXX' /> and via email at <input id='user-email' placeholder='example@me.com' />.
-                I currently live at <input id='user-street-address' placeholder='Street Address' />, <input id='user-city' placeholder='City' />, <input id='user-state' placeholder='State' /> <input id='user-zip' placeholder='Zip Code' />.
-                I was traveling on <input id='user-travel-date' placeholder='MM/DD/YYYY' /> on a 
-                <select>
-                  <option value=''>Select One</option>
-                  <option value=''>Subway</option>
-                  <option value=''>Bus</option>
-                  <option value=''>Multiple Buses/Trains</option>
-                  <option value=''>Not Sure</option>
-                </select>
+                I, <input id='user-name' placeholder='Full Name' />, have lost my <span id='user-item'></span>.
+                <span class='form-section' data-section='2'>
+                  You can contact me via cell at <input id='user-phone' placeholder='XXX-XXX-XXXX' /> 
+                </span>
+                <span class='form-section' data-section='3'>
+                  and via email at <input id='user-email' placeholder='example@me.com' />.
+                </span>
+                <span class='form-section' data-section='4'>
+                  I currently live at <input id='user-street-address' placeholder='Street Address' />, <input id='user-city' placeholder='City' />, <input id='user-state' placeholder='State' /> <input id='user-zip' placeholder='Zip Code' />.
+                </span>
+                <span class='form-section' data-section='5'>
+                  I was traveling via
+                  <select id='user-transport'>
+                    <option value=''>Select One</option>
+                    <option value=''>Subway</option>
+                    <option value=''>Bus</option>
+                    <option value=''>Multiple Buses/Trains</option>
+                    <option value=''>Not Sure</option>
+                  </select>
+                </span>
+                <span class='form-section' data-section='6'>
+                  on <input id='user-travel-date' placeholder='MM/DD/YYYY' />.
+                </span>
               </p>
               <div class='submit-claim-container'>
-                <button class='btn btn-default submit-claim'>Submit Claim</button> 
+                <button class='btn btn-default user-button submit-claim'>
+                  <i class='ion-ios-paperplane-outline'></i>
+                  <p class='user-button-text'>Submit Claim</p>
+                </button> 
               </div>
             </div>
           </div>
@@ -88,8 +104,12 @@
               <h4 class='message'>Thank you for filing your claim.</h4>
               <h4 class='message'>The MTA Authority will get back to you via email.</h4>
               <a class='start-over-container' href="">
-                <i class='ion-ios-arrow-thin-left back-arrow-icon'></i>
-                <h4 class='message start-over'>File another</h4>
+                <button class='btn btn-default user-button start-over'>
+                  <i class='ion-ios-arrow-left'></i>
+                  <p class='user-button-text'>File Another</p>
+                </button>
+                <!-- <i class='ion-ios-arrow-thin-left back-arrow-icon'></i> -->
+                <!-- <h4 class='message start-over'>File another</h4> -->
               </a>
             </div>
           </div>

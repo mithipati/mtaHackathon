@@ -173,11 +173,15 @@ var bubbles = function() {
           return id === idValue(d);
         });
         if (id.length > 0 && id != 2) {
-          $('#status').html('Find your ' +id);
+          $('#status')
+            .addClass('nav-link-active')
+            .html('Find your ' +id);
           $('.next-button').fadeIn();
           $('.next-button').addClass('animated fadeInDown');
         } else {
-          $('#status').html('What did you lose?');
+          $('#status')
+            .removeClass('nav-link-active')
+            .html('What did you lose?');
           $('.next-button').hide();
         }
     };
@@ -265,7 +269,7 @@ $(function() {
                 $('.next-button').fadeOut();
                 $('.status-text').removeClass('animated fadeInLeft');
                 $('.card-container').addClass('bounceInRight');
-                
+
                 $('.first').html('2. Select a sub category');
                 $('#progress').css('width', '50%');
                 window.location.hash = '3';
@@ -301,6 +305,132 @@ $(function() {
             }
         );
     });
+
+    var formTimeout;
+    function renderPhoneSection(e) {
+        var $targetInput = $('.form-section[data-section="2"]');
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $targetInput.fadeIn('slow');
+            $targetInput.find('input').focus();
+            formTimeout = undefined;
+        }, 700);
+    }
+
+    function renderEmailSection(e) {
+        var $targetInput = $('.form-section[data-section="3"]');
+        $main.undelegate('#user-name', 'input', renderPhoneSection);
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $targetInput.fadeIn('slow');
+            $targetInput.find('input').focus();
+            formTimeout = undefined;
+        }, 700);
+    }
+
+    function renderAddressSection(e) {
+        var $targetInput = $('.form-section[data-section="4"]');
+        $main.undelegate('#user-phone', 'input', renderEmailSection);
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $targetInput.fadeIn('slow');
+            $targetInput.find('#user-street-address').focus();
+            formTimeout = undefined;
+        }, 700);
+    }
+
+    function renderTransportSection(e) {
+        var $targetInput = $('.form-section[data-section="5"]');
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $targetInput.fadeIn('slow');
+            $targetInput.find('select').focus();
+            formTimeout = undefined;
+        }, 700);
+    }
+
+    function renderDateSection(e) {
+        var $targetInput = $('.form-section[data-section="6"]');
+        $main.undelegate('#user-zip', 'input', renderTransportSection);
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $targetInput.fadeIn('slow');
+            $targetInput.find('input').focus();
+            formTimeout = undefined;
+        }, 700);
+    }
+
+    function renderSubmitButton(e) {
+        var $button = $('.submit-claim-container');
+        $main.undelegate('#user-transport', 'change', renderDateSection);
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $button.fadeIn('slow');
+            formTimeout = undefined;
+        }, 800);
+    }
+
+    $main.on('input', '#user-street-address', function(e) {
+        $main.undelegate('#user-email', 'input', renderAddressSection);
+    });
+
+    $main.delegate('#user-name', 'input', renderPhoneSection);
+    $main.delegate('#user-phone', 'input', renderEmailSection);
+    $main.delegate('#user-email', 'input', renderAddressSection);
+    $main.delegate('#user-zip', 'input', renderTransportSection);
+    $main.delegate('#user-transport', 'change', renderDateSection);
+    $main.delegate('#user-travel-date', 'input', renderSubmitButton);
+
+
+    // $main.on('input', '#user-name', function(e) {
+    //     var $targetInput = $('.form-section[data-section="2"]');
+
+    //     if (formTimeout) { 
+    //         clearTimeout(formTimeout); 
+    //     }
+
+    //     formTimeout = setTimeout(function() {
+    //         $targetInput.fadeIn('slow');
+    //         $targetInput.find('input').focus();
+    //         formTimeout = undefined;
+    //     }, 700);
+    // });
+
+    // $main.on('input', '#user-phone', function(e) {
+        
+    // });
+
+    // $main.on('input', '#user-email', function(e) {
+        
+    // });
+
+    // $main.on('input', '#user-zip', function(e) {
+        
+    // });
 
     $main.on('click', '.submit-claim', function(e) {
         e.preventDefault();

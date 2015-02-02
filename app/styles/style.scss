@@ -70,9 +70,19 @@ nav {
 
 .sub-text {
 	font-size: 40px;
+  font-weight: 300;
+}
 
-	&:hover {
-	}
+#status {
+  font-weight: 300;
+}
+
+.nav-link-active {
+  cursor: pointer;
+
+  &:hover {
+    color: $accent-hover;
+  }
 }
 
 .status-text {
@@ -80,7 +90,6 @@ nav {
   color: $accent;
 
 }
-
 
 .next-button {
 	position: relative;
@@ -177,6 +186,10 @@ nav {
   width: 1000px;
   color: #FFF;
 
+  .form-section {
+    display: none;
+  }
+
   .user-form-text {
     line-height: 85px;
     font-size: 26px;
@@ -201,6 +214,48 @@ nav {
         outline: none;
       }
     }
+  }
+
+  .submit-claim-container {
+    display: none;
+    margin-top: 50px;
+  }
+}
+
+.user-button {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 20px;
+  background: transparent;
+  border: 1px solid $accent;
+  color: $accent;
+
+  i {
+    float: left;
+    font-size: 40px;
+  }
+
+  .user-button-text {
+    float: left;
+    margin-top: 11px;
+    margin-left: 20px;
+    font-size: 24px;
+  }
+
+  &:hover {
+    border: 1px solid $accent-hover !important;
+    background: transparent !important;
+    color: $accent-hover;
+  }
+
+  &:focus {
+    color: $accent-hover !important;
+    background: transparent !important;
+    outline: 5px auto $accent-hover !important;
+  }
+
+  &.start-over {
+    margin-top: 50px;
   }
 }
 
@@ -227,23 +282,6 @@ nav {
   .start-over-container {
     text-decoration: none;
     color: $accent;
-
-    .back-arrow-icon {
-      font-size: 80px;
-    }
-
-    .start-over {
-      color: $accent;
-      margin-top: -50px;
-
-      &:hover {
-        color: $accent-hover;
-      }
-    }
-
-    &:hover {
-      color: $accent-hover;
-    }
   }
 }
 
