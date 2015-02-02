@@ -23,64 +23,32 @@
 
   </head>
   <body>
-     
-      <div id="overlay"></div>
-
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-
-<!--     <header class="app-bar promote-layer">
-      <div class="app-bar-container">
-        <button class="menu"><img src="images/hamburger.svg" alt="Menu"></button>
-        <section class="app-bar-actions">
-        Put App Bar Buttons Here
-        e.g <button><i class="icon icon-star"></i></button>
-        </section>
-      </div>
-    </header> -->
+    <div id="overlay"></div>
     <div class='progress-wrapper'>
-
       <div id='progress'><div class= 'first'> 1. Choose a category </div> </div>
     </div>
-
     <main>
       <div class='main-container'>
         <div class='main-text'>
           <div class='page' data-page='1'>
-           <div id="bg"></div>
-           <div id="overlay"></div>
-
-        
-        <section id="banner">
-        
-        <div class="inner">
-          
-          <h1 class='welcome-text'><strong>MTA</strong> Found<strong>It</strong></h1>
-          <h3 class='sub-text nav-link'><a class='nav-link nav-button start-button' href="">Find your lost belongings here <i class='ion-chevron-right'></i></a></h3>
-
-        
-        </div>
-        
-      </section>
-
-            
-            
+            <div id="bg"></div>
+            <div id="overlay"></div>
+            <section id="banner">
+              <div class="inner">
+                
+                <h1 class='welcome-text'><strong>MTA</strong> Found<strong>It</strong></h1>
+                <h3 class='sub-text nav-link'><a class='nav-link nav-button start-button' href="">Find your lost belongings here <i class='ion-chevron-right'></i></a></h3>
+              </div>
+            </section>
           </div>
           <div class='page' data-page='2'>
-          <div id='vis'></div>
-            
-
+            <div id='vis'></div>
             <div class='status-text'>
               <h2 id='status'></h2><i class=' nav-link view-card next-button ion-chevron-right'></i>
             </div>
-
-
-
-
-
-            
           </div>
           <div class='page' data-page='3'>
             <div class='card-container'>
@@ -93,7 +61,26 @@
               <div class='subcategory-container'></div>
               <div class='card-info'>* All changes are as of last hour</div>
             </div>
-            <!-- <p><a class='nav-link nav-button' href="">go back</a></p> -->
+          </div>
+          <div class='page' data-page='4'>
+            <div id='user-form'>
+              <p class='user-form-text'>
+                I, <input id='user-name' placeholder='Full Name' />, have lost: <span id='user-item'></span>.
+                You can contact me via cell at <input id='user-phone' placeholder='XXX-XXX-XXXX' /> and via email at <input id='user-email' placeholder='example@me.com' />.
+                I currently live at <input id='user-street-address' placeholder='Street Address' />, <input id='user-city' placeholder='City' />, <input id='user-state' placeholder='State' /> <input id='user-zip' placeholder='Zip Code' />.
+                I was traveling on <input id='user-travel-date' placeholder='MM/DD/YYYY' /> on a 
+                <select>
+                  <option value=''>Select One</option>
+                  <option value=''>Subway</option>
+                  <option value=''>Bus</option>
+                  <option value=''>Multiple Buses/Trains</option>
+                  <option value=''>Not Sure</option>
+                </select>
+              </p>
+              <div class='submit-claim'>
+                <button class='btn btn-default'>Submit Claim</button> 
+              </div>
+            </div>
           </div>
         </div>
       </div>

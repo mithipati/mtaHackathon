@@ -173,7 +173,7 @@ var bubbles = function() {
           return id === idValue(d);
         });
         if (id.length > 0 && id != 2) {
-          $('#status').html('Find Your ' +id);
+          $('#status').html('Find your ' +id);
           $('.next-button').fadeIn();
           $('.next-button').addClass('animated fadeInDown');
         } else {
@@ -263,10 +263,41 @@ $(function() {
                 $('.next-button').fadeOut();
                 $('.status-text').removeClass('animated fadeInLeft');
                 $('.card-container').addClass('bounceInRight');
+                $('.first').html('2. Select a sub category');
                 $('#progress').css('width', '50%');
                 window.location.hash = '3';
             }
         );
+    });
+
+    $main.on('click', '.card-link', function(e) {
+        e.preventDefault();
+        var $targetPage = $('.page[data-page="4"]'),
+            $previousPage = $('.page[data-page="3"]'),
+            item = $(e.target).data('item');
+
+        $('.card-container').addClass('bounceOutLeft');
+        $('.card-container').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+            function() {
+                $previousPage.hide();
+                $targetPage.show();
+                $('.card-container').removeClass('bounceInRight');
+                $('.card-container').removeClass('bounceOutLeft');
+
+                $('#user-item').html(item);
+                $('#user-form').addClass('animated fadeInRight');
+                $('#user-form').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+                    function() {
+                        $('#user-name').focus();
+                    }
+                );
+
+                $('.first').html('3. File a claim');
+                $('#progress').css('width', '75%');
+                window.location.hash = '4';
+            }
+        );
+
     });
 
     $main.on('click', '.dismiss', function(e) {
@@ -317,7 +348,10 @@ $(function() {
             count = _numberWithCommas(count);
 
             var cardSub  = $('<div />')
-                            .addClass('card-sub')
+                            .addClass('card-sub');
+            var cardLink = $('<a />')
+                            .addClass('card-link')
+                            .data('item', name)
                             .html(name);
             var cardStat = $('<div />')
                             .addClass('card-stat')
@@ -327,8 +361,8 @@ $(function() {
             if (i == subCategories.length - 1) {
                 cardStat.css('margin-bottom', '20px');
             }
-
             $container.append(cardSub);
+            cardSub.append(cardLink);
             $container.append(cardStat);
         }
     }

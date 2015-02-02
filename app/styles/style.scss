@@ -127,7 +127,20 @@ nav {
     margin-bottom: 10px;
     color: #FFF;
 
+    .card-link {
+      font-size: 18px;
+      font-weight: 600;
+      color: #FF9900;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
     &.card-header {
+      text-decoration: underline;
       font-weight: 600;
     }
   }
@@ -138,6 +151,7 @@ nav {
     color: #FFF;
 
     &.card-header {
+      text-decoration: underline;
       font-weight: 600;
     }
   }
@@ -146,6 +160,41 @@ nav {
     position: absolute;
     bottom: 15px;
     color: #FFF;
+  }
+}
+
+#user-form {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -500px;
+  width: 1000px;
+  color: #FFF;
+
+  .user-form-text {
+    line-height: 85px;
+    font-size: 26px;
+    font-weight: 300;
+
+    input {
+      color: #FFF;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px dotted #ced2d8;
+      text-align: center;
+      line-height: normal;
+      display: inline-block;
+      vertical-align: baseline;
+      margin: 0;
+      padding: 0;
+      font-size: 1em;
+      font-weight: 300;
+      text-overflow: ellipsis;
+
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }
 
