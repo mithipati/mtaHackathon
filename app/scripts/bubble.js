@@ -238,6 +238,8 @@ $(function() {
                 $targetPage.show();
                 $('#vis').addClass('animated fadeInRight');
                 $('.status-text').addClass('animated fadeInRight');
+
+                $('.first').html('1. Choose a category');
                 $('#progress').css('width', '25%');
                 window.location.hash = '2';
             }
@@ -263,6 +265,7 @@ $(function() {
                 $('.next-button').fadeOut();
                 $('.status-text').removeClass('animated fadeInLeft');
                 $('.card-container').addClass('bounceInRight');
+                
                 $('.first').html('2. Select a sub category');
                 $('#progress').css('width', '50%');
                 window.location.hash = '3';
@@ -297,7 +300,26 @@ $(function() {
                 window.location.hash = '4';
             }
         );
+    });
 
+    $main.on('click', '.submit-claim', function(e) {
+        e.preventDefault();
+        var $targetPage = $('.page[data-page="5"]'),
+            $previousPage = $('.page[data-page="4"]');
+
+        $('#user-form').addClass('fadeOutLeft');
+        $('#user-form').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+            function() {
+                $previousPage.hide();
+                $targetPage.show();
+
+                $('.thank-you-message').addClass('animated fadeInRight');
+
+                $('.first').html('Claim Completed');
+                $('#progress').css('width', '100%');
+                window.location.hash = '5';
+            }
+        );
     });
 
     $main.on('click', '.dismiss', function(e) {
