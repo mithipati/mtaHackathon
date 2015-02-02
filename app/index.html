@@ -23,6 +23,9 @@
 
   </head>
   <body>
+     
+      <div id="overlay"></div>
+
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -38,21 +41,46 @@
       </div>
     </header> -->
     <div class='progress-wrapper'>
-      <div id='progress'></div>
+
+      <div id='progress'><div class= 'first'> 1. Choose a category </div> </div>
     </div>
 
     <main>
       <div class='main-container'>
         <div class='main-text'>
           <div class='page' data-page='1'>
-            <h1 class='welcome-text'>Lost<strong>It</strong></h1>
-            <h3 class='sub-text nav-link'><a class='nav-link nav-button start-button' href="">Find your stuff <i class='ion-chevron-right'></i></a></h3>
+           <div id="bg"></div>
+           <div id="overlay"></div>
+
+        
+        <section id="banner">
+        
+        <div class="inner">
+          
+          <h1 class='welcome-text'><strong>MTA</strong> Found<strong>It</strong></h1>
+          <h3 class='sub-text nav-link'><a class='nav-link nav-button start-button' href="">Find your lost belongings here <i class='ion-chevron-right'></i></a></h3>
+
+        
+        </div>
+        
+      </section>
+
+            
+            
           </div>
           <div class='page' data-page='2'>
-            <div id='vis'></div>
+          <div id='vis'></div>
+            
+
             <div class='status-text'>
-              <h2 id='status'></h2><i class='view-card next-button ion-chevron-right'></i>
+              <h2 id='status'></h2><i class=' nav-link view-card next-button ion-chevron-right'></i>
             </div>
+
+
+
+
+
+            
           </div>
           <div class='page' data-page='3'>
             <div class='card-container'>
@@ -60,8 +88,8 @@
                 <i class='ion-ios-close'></i>
               </div>
               <div class='card-title'></div>
-              <div class='card-sub card-header'>name</div>
-              <div class='card-stat card-header'>change*</div>
+              <div class='card-sub card-header'>Item</div>
+              <div class='card-stat card-header'>Count</div>
               <div class='subcategory-container'></div>
               <div class='card-info'>* All changes are as of last hour</div>
             </div>

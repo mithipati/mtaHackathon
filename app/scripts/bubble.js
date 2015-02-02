@@ -11,8 +11,8 @@ var bubbles = function() {
     bottom: 0,
     left: 0
     };
-    maxRadius = 125;
-    rScale = d3.scale.sqrt().range([0, maxRadius]);
+    maxRadius = 120;
+    rScale = d3.scale.sqrt().range([7, maxRadius]);
     rValue = function(d) {
         return parseInt(d.count);
     };
@@ -22,8 +22,8 @@ var bubbles = function() {
     textValue = function(d) {
         return d.name;
     };
-    collisionPadding = 4;
-    minCollisionRadius = 12;
+    collisionPadding = 10;
+    minCollisionRadius = 10;
     jitter = 0.25;
     transformData = function(rawData) {
     rawData.forEach(function(d) {
@@ -43,7 +43,7 @@ var bubbles = function() {
         return label.style('left', function(d) {
           return ((margin.left + d.x) - d.dx / 2) + 'px';
         }).style('top', function(d) {
-          return ((margin.top + d.y) - d.dy / 2) + 'px';
+          return ((margin.top + d.y) - d.dy / 5) + 'px';
         });
     };
     force = d3.layout.force().gravity(0).charge(0).size([width, height]).on('tick', tick);
@@ -102,14 +102,14 @@ var bubbles = function() {
           return rValue(d);
         });
         label.style('font-size', function(d) {
-          return Math.max(6, rScale(rValue(d) / 6)) + 'px';
+          return Math.max(8, rScale(rValue(d)/20)) + 'px';
         }).style('width', function(d) {
-          return 3.5 * rScale(rValue(d)) + 'px';
+          return .5 * rScale(rValue(d)) + 'px';
         });
         label.append('span').text(function(d) {
           return textValue(d);
         }).each(function(d) {
-          d.dx = Math.max(2.5 * rScale(rValue(d)), this.getBoundingClientRect().width);
+          d.dx = Math.max(2 * rScale(rValue(d)), this.getBoundingClientRect().width);
         }).remove();
         label.style('width', function(d) {
           return d.dx + 'px';
@@ -173,7 +173,7 @@ var bubbles = function() {
           return id === idValue(d);
         });
         if (id.length > 0 && id != 2) {
-          $('#status').html(id + '?');
+          $('#status').html('Find Your ' +id);
           $('.next-button').fadeIn();
           $('.next-button').addClass('animated fadeInDown');
         } else {
