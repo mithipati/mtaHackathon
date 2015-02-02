@@ -21,11 +21,12 @@ nav {
 
 .progress-wrapper {
   width: 100%;
-  height: 5px;
+  height: 20px;
   background:#BCBCBC;
+  z-index: 1;
 
   #progress {
-    height: 5px;
+    height: 20px;
     width: 0%;
     background-color: #FF9900;
     border-radius: 0px;
@@ -37,6 +38,12 @@ nav {
     &:hover {
       width: 100%;
     }
+  }
+  #progress .first{
+    color: #424242;
+    font-size: 15px;
+    text-align: center;
+
   }
 }
 
@@ -50,10 +57,10 @@ nav {
 }
 
 .welcome-text {
-	font-weight: 200;
-	font-size: 175px;
-	margin-top: 160px;
-  color: #424242;
+	font-weight: 20;
+	font-size: 75px;
+	margin-top: 1px;
+  color: #E9E9E9;
   
 }
 
@@ -160,7 +167,7 @@ nav {
     -ms-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
     /* Set your background with this */
-    background: #348cb2 url(/images/bg.jpg) bottom left;
+    background: #000000 url(/images/bg.jpg) bottom left;
     background-repeat: repeat-x;
     height: 100%;
     left: 0;
@@ -204,3 +211,43 @@ nav {
     top: 0;
     width: 100%;
   }
+
+
+    @-moz-keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @-webkit-keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @-o-keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @-ms-keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+/* Overlay */
+  #banner {
+    background-attachment: scroll, scroll, scroll, fixed;
+
+
+    background-size: 25em, 25em, auto, cover;
+    cursor: default;
+    padding: 6em 0;
+    text-align: center;
+  }
+
+    #banner .inner {
+      -moz-animation: reveal-banner 1s 0.25s ease-in-out;
+      -webkit-animation: reveal-banner 1s 0.25s ease-in-out;
+      -o-animation: reveal-banner 1s 0.25s ease-in-out;
+      -ms-animation: reveal-banner 1s 0.25s ease-in-out;
+      animation: reveal-banner 1s 0.25s ease-in-out;
+      -moz-animation-fill-mode: forwards;
+      -webkit-animation-fill-mode: forwards;
+      -o-animation-fill-mode: forwards;
+      -ms-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+      background: rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      opacity: 0;
+      padding: 3em;
+      text-align: center;
+      width: 100%;
+
+
+    }
+
