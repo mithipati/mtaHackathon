@@ -291,16 +291,16 @@ module.exports = function (grunt) {
 
     buildcontrol: {
       options: {
-          dir: 'dist',
-          commit: true,
-          push: true,
-          message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+        dir: 'dist',
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
       heroku: {
-          options: {
-              remote: 'git@heroku.com:guarded-shore-1849.git',
-              branch: 'master'
-          }
+        options: {
+            remote: 'git@heroku.com:guarded-shore-1849.git',
+            branch: 'master'
+        }
       }
     },
 
