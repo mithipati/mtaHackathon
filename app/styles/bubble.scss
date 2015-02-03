@@ -13,8 +13,9 @@
 #status {
   position: relative;
   display: inline-block;
-  margin-right: 40px;
+  margin-right: 20px;
   margin-bottom: 15px;
+  font-weight: 300;
 }
 
 #bubble-background {
@@ -24,20 +25,21 @@
 
 .bubble-node {
   /* fill: #d1e0f3; */
-  fill: #3299BB;
+  fill: rgba(50, 153, 187, 0.5);
+  // fill: #3299BB;
 }
 
 .bubble-hover {
   /* fill: #b8c7d9; */
   // fill: #E8E9E7;
-  fill: #64b9d6;
+  // fill: #64b9d6;
+  fill: rgba(100, 185, 214, 0.4);
 }
 
 .bubble-selected {
   /* fill: #a8c8ee;  */
-  fill: #64b9d6;
-  /* stroke: #6081a3; */
-  stroke: #424242;
+  fill: rgba(50, 153, 187, 1);
+  stroke: #FFF;
   stroke-width: 1.5px;
 }
 

@@ -176,12 +176,14 @@ var bubbles = function() {
           $('#status')
             .addClass('nav-link-active')
             .html('Find your ' +id);
+          $('.status-message-container').addClass('view-card');
           $('.next-button').fadeIn();
           $('.next-button').addClass('animated fadeInDown');
         } else {
           $('#status')
             .removeClass('nav-link-active')
             .html('What did you lose?');
+          $('.status-message-container').removeClass('view-card');
           $('.next-button').hide();
         }
     };
@@ -243,8 +245,10 @@ $(function() {
                 $('#vis').addClass('animated fadeInRight');
                 $('.status-text').addClass('animated fadeInRight');
 
-                $('.first').html('1. Choose a category');
                 $('#progress').css('width', '25%');
+                setTimeout(function() {
+                    $('.first').html('1. Choose a category');
+                }, 800);
                 window.location.hash = '2';
             }
         );
@@ -270,7 +274,7 @@ $(function() {
                 $('.status-text').removeClass('animated fadeInLeft');
                 $('.card-container').addClass('bounceInRight');
 
-                $('.first').html('2. Select a sub category');
+                $('.first').html('2. Choose an item');
                 $('#progress').css('width', '50%');
                 window.location.hash = '3';
             }
@@ -306,7 +310,8 @@ $(function() {
         );
     });
 
-    var formTimeout;
+    var formTimeout,
+        duration = 800;
     function renderPhoneSection(e) {
         var $targetInput = $('.form-section[data-section="2"]');
 
@@ -318,7 +323,7 @@ $(function() {
             $targetInput.fadeIn('slow');
             $targetInput.find('input').focus();
             formTimeout = undefined;
-        }, 700);
+        }, duration);
     }
 
     function renderEmailSection(e) {
@@ -333,7 +338,7 @@ $(function() {
             $targetInput.fadeIn('slow');
             $targetInput.find('input').focus();
             formTimeout = undefined;
-        }, 700);
+        }, duration);
     }
 
     function renderAddressSection(e) {
@@ -348,25 +353,11 @@ $(function() {
             $targetInput.fadeIn('slow');
             $targetInput.find('#user-street-address').focus();
             formTimeout = undefined;
-        }, 700);
-    }
-
-    function renderTransportSection(e) {
-        var $targetInput = $('.form-section[data-section="5"]');
-
-        if (formTimeout) { 
-            clearTimeout(formTimeout); 
-        }
-
-        formTimeout = setTimeout(function() {
-            $targetInput.fadeIn('slow');
-            $targetInput.find('select').focus();
-            formTimeout = undefined;
-        }, 700);
+        }, duration);
     }
 
     function renderDateSection(e) {
-        var $targetInput = $('.form-section[data-section="6"]');
+        var $targetInput = $('.form-section[data-section="5"]');
         $main.undelegate('#user-zip', 'input', renderTransportSection);
 
         if (formTimeout) { 
@@ -377,7 +368,22 @@ $(function() {
             $targetInput.fadeIn('slow');
             $targetInput.find('input').focus();
             formTimeout = undefined;
-        }, 700);
+        }, duration);
+    }
+
+    function renderTransportSection(e) {
+        var $targetInput = $('.form-section[data-section="6"]');
+
+        if (formTimeout) { 
+            clearTimeout(formTimeout); 
+        }
+
+        formTimeout = setTimeout(function() {
+            $targetInput.fadeIn('slow');
+            $targetInput.css('display', 'inline-block');
+            $targetInput.find('select').focus();
+            formTimeout = undefined;
+        }, duration);
     }
 
     function renderSubmitButton(e) {
@@ -391,7 +397,7 @@ $(function() {
         formTimeout = setTimeout(function() {
             $button.fadeIn('slow');
             formTimeout = undefined;
-        }, 800);
+        }, 1000);
     }
 
     $main.on('input', '#user-street-address', function(e) {
@@ -401,29 +407,57 @@ $(function() {
     $main.delegate('#user-name', 'input', renderPhoneSection);
     $main.delegate('#user-phone', 'input', renderEmailSection);
     $main.delegate('#user-email', 'input', renderAddressSection);
-    $main.delegate('#user-zip', 'input', renderTransportSection);
-    $main.delegate('#user-transport', 'change', renderDateSection);
-    $main.delegate('#user-travel-date', 'input', renderSubmitButton);
+    $main.delegate('#user-zip', 'input', renderDateSection);
+    $main.delegate('#user-travel-date', 'input', renderTransportSection);
+    $main.delegate('#user-transport', 'change', renderSubmitButton);
 
     $main.on('click', '.submit-claim', function(e) {
         e.preventDefault();
         var $targetPage = $('.page[data-page="5"]'),
-            $previousPage = $('.page[data-page="4"]');
+            $previousPage = $('.page[data-page="4"]'),
+            userName = $('#user-name').val().split(' ')[0];
 
         $('#user-form').addClass('fadeOutLeft');
         $('#user-form').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
             function() {
                 $previousPage.hide();
                 $targetPage.show();
+                initSpinner();
+                $('.first').html('Sending claim...');
 
-                $('.thank-you-message').addClass('animated fadeInRight');
+                $targetPage = $('.page[data-page="6"]');
+                $previousPage = $('.page[data-page="5"]');
 
-                $('.first').html('Claim Completed');
-                $('#progress').css('width', '100%');
-                window.location.hash = '5';
+                setTimeout(function() {
+                    $previousPage.hide();
+                    $targetPage.fadeIn('slow');
+
+                    $('#user-first-name').html(userName);
+                    $('.thank-you-message').addClass('animated fadeInRight');
+
+                    $('.first').html('Claim Completed');
+                    $('#progress').css('width', '100%');
+                    window.location.hash = '5';
+                }, 2000);
             }
         );
     });
+
+    function initSpinner() {
+        var target  = document.getElementById('loading-spinner'),
+            opts = {
+                lines: 9,
+                radius: 30,
+                speed: 1,
+                corners: 1,
+                className: 'spinner',
+                direction: 1,
+                color: '#FF9900',
+                width: 10,
+                length: 20
+            },
+            spinner = new Spinner(opts).spin(target);
+    }
 
     $main.on('click', '.dismiss', function(e) {
         e.preventDefault();
@@ -506,9 +540,12 @@ $(function() {
             function() {
                 $previousPage.hide();
                 $targetPage.fadeIn('fast');
+                $('.subcategory-container').html('');
                 $('.card-container').removeClass('bounceOutRight');
                 $('#vis').addClass('animated fadeInLeft');
                 $('.status-text').addClass('animated fadeInLeft');
+
+                $('.first').html('1. Choose a category');
                 $('#progress').css('width', '25%');
                 window.location.hash = '2';
             }
@@ -579,14 +616,123 @@ $(function() {
     /* Render first view */
     setPage(1);
 
+    var seedData = [
+        {
+            categoryName: 'Cell Phones',
+            subCategories: [
+                {
+                    subCategoryName: 'Mobile',
+                    subCategoryCount: 456
+                },
+                {
+                    subCategoryName: 'Home',
+                    subCategoryCount: 783
+                },
+                {
+                    subCategoryName: 'Landline',
+                    subCategoryCount: 456
+                },
+                {
+                    subCategoryName: 'Fax',
+                    subCategoryCount: 456
+                }
+            ]
+        },
+        {
+            categoryName: 'Television',
+            subCategories: [
+                {
+                    subCategoryName: 'LG',
+                    subCategoryCount: 888
+                },
+                {
+                    subCategoryName: 'Samsung',
+                    subCategoryCount: 888
+                },
+                {
+                    subCategoryName: 'Sony',
+                    subCategoryCount: 333
+                },
+                {
+                    subCategoryName: 'Vizio',
+                    subCategoryCount: 456
+                }
+            ]
+        },
+        {
+            categoryName: 'Sports',
+            subCategories: [
+                {
+                    subCategoryName: 'Football',
+                    subCategoryCount: 999
+                },
+                {
+                    subCategoryName: 'Basketball',
+                    subCategoryCount: 111
+                },
+                {
+                    subCategoryName: 'Soccer Ball',
+                    subCategoryCount: 42
+                },
+                {
+                    subCategoryName: 'Cricket Ball',
+                    subCategoryCount: 778
+                }
+            ]
+        },
+        {
+            categoryName: 'Clothing',
+            subCategories: [
+                {
+                    subCategoryName: 'Jeans',
+                    subCategoryCount: 54
+                },
+                {
+                    subCategoryName: 'Shirt',
+                    subCategoryCount: 73
+                },
+                {
+                    subCategoryName: 'Shoes',
+                    subCategoryCount: 111
+                },
+                {
+                    subCategoryName: 'Socks',
+                    subCategoryCount: 556
+                }
+            ]
+        },
+        {
+            categoryName: 'Wallets',
+            subCategories: [
+                {
+                    subCategoryName: 'Purse',
+                    subCategoryCount: 989
+                },
+                {
+                    subCategoryName: 'Murse',
+                    subCategoryCount: 345
+                },
+                {
+                    subCategoryName: 'Wallet',
+                    subCategoryCount: 211
+                },
+                {
+                    subCategoryName: 'Money Clip',
+                    subCategoryCount: 142
+                }
+            ]
+        }
+
+    ];
+
     /* Instantiate D3 Bubble Chart */
     d3.json(
         'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest', 
         function(data) {
-            // console.log(data);
             var newData = formatCategories(data['categories']);
-            // console.log(newData);
             d3.select('#vis').datum(newData).call(plot);
         }
     );
+    // var newData = formatCategories(seedData);
+    // d3.select('#vis').datum(newData).call(plot);
 });

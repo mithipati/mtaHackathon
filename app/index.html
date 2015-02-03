@@ -46,8 +46,8 @@
           <div class='page' data-page='2'>
             <div id='vis'></div>
             <div class='status-text'>
-              <div class='view-card'>
-                <h2 id='status'></h2><i class='nav-link next-button ion-chevron-right'></i>
+              <div class='status-message-container'>
+                <h2 id='status'></h2><i class='next-button ion-chevron-right'></i>
               </div>
             </div>
           </div>
@@ -66,29 +66,37 @@
           <div class='page' data-page='4'>
             <div id='user-form'>
               <p class='user-form-text'>
-                I, <input id='user-name' placeholder='Full Name' />, have lost my <span id='user-item'></span>.
+                <span data-section='1'>
+                  I, <input id='user-name' placeholder='Full Name' />, have lost my <span id='user-item'></span>.
+                </span>
                 <span class='form-section' data-section='2'>
-                  You can contact me via cell at <input id='user-phone' placeholder='XXX-XXX-XXXX' /> 
+                  You can contact me via cell at <input id='user-phone' placeholder='XXX-XXX-XXXX' />
                 </span>
                 <span class='form-section' data-section='3'>
                   and via email at <input id='user-email' placeholder='example@me.com' />.
                 </span>
                 <span class='form-section' data-section='4'>
-                  I currently live at <input id='user-street-address' placeholder='Street Address' />, <input id='user-city' placeholder='City' />, <input id='user-state' placeholder='State' /> <input id='user-zip' placeholder='Zip Code' />.
+                  I currently live at
+                  <span class='user-address'>
+                    <input id='user-street-address' placeholder='Street Address' />, <input id='user-city' placeholder='City' />, <input id='user-state' placeholder='State' /> <input id='user-zip' placeholder='Zip Code' />.
+                  </span>
                 </span>
                 <span class='form-section' data-section='5'>
-                  I was traveling via
+                  <span class='user-travel-date-container'>
+                    I lost my item on <input id='user-travel-date' placeholder='MM/DD/YYYY' />
+                  </span>
+                </span>
+                <span class='form-section' data-section='6'>
+                  while riding the 
                   <select id='user-transport'>
                     <option value=''>Select One</option>
                     <option value=''>Subway</option>
                     <option value=''>Bus</option>
-                    <option value=''>Multiple Buses/Trains</option>
+                    <option value=''>Multiple</option>
                     <option value=''>Not Sure</option>
                   </select>
                 </span>
-                <span class='form-section' data-section='6'>
-                  on <input id='user-travel-date' placeholder='MM/DD/YYYY' />.
-                </span>
+                  . 
               </p>
               <div class='submit-claim-container'>
                 <button class='btn btn-default user-button submit-claim'>
@@ -99,17 +107,18 @@
             </div>
           </div>
           <div class='page' data-page='5'>
+            <div id='loading-spinner'></div>
+          </div>
+          <div class='page' data-page='6'>
             <div class='thank-you-message'>
               <i class='ion-ios-checkmark-outline success-icon'></i>
-              <h4 class='message'>Thank you for filing your claim.</h4>
-              <h4 class='message'>The MTA Authority will get back to you via email.</h4>
+              <h4 class='message'>Thank you, <span id='user-first-name'></span>, for filing your claim.</h4>
+              <h4 class='message'>The MTA Lost and Found unit will get back to you via email.</h4>
               <a class='start-over-container' href="">
                 <button class='btn btn-default user-button start-over'>
                   <i class='ion-ios-arrow-left'></i>
                   <p class='user-button-text'>File Another</p>
                 </button>
-                <!-- <i class='ion-ios-arrow-thin-left back-arrow-icon'></i> -->
-                <!-- <h4 class='message start-over'>File another</h4> -->
               </a>
             </div>
           </div>
@@ -133,6 +142,7 @@
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
     <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
