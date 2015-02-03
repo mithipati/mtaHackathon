@@ -298,7 +298,7 @@ module.exports = function (grunt) {
       },
       heroku: {
         options: {
-            remote: 'git@heroku.com:evening-tundra-4600.git',
+            remote: 'https://git.heroku.com/evening-tundra-4600.git',
             branch: 'master'
         }
       }
