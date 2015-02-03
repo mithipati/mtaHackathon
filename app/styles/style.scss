@@ -251,6 +251,22 @@ nav {
   display: inline-block;
 }
 
+.error-message-container {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -300px;
+  width: 600px;
+
+  #error-message {
+    display: none;
+    font-size: 26px;
+    font-weight: 300;
+    color: red;
+  }
+}
+
 .user-button {
   padding-top: 5px;
   padding-bottom: 5px;

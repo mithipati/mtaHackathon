@@ -310,78 +310,236 @@ $(function() {
         );
     });
 
+    $main.on('click', '.submit-claim', function(e) {
+        e.preventDefault();
+        var $targetPage = $('.page[data-page="5"]'),
+            $previousPage = $('.page[data-page="4"]'),
+            userName = $('#user-name').val().split(' ')[0];
+
+        if (isValidForm()) {
+            $('#user-form').addClass('fadeOutLeft');
+            $('#user-form').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+                function() {
+                    $previousPage.hide();
+                    $targetPage.show();
+                    initSpinner();
+                    $('.first').html('Sending claim...');
+
+                    $targetPage = $('.page[data-page="6"]');
+                    $previousPage = $('.page[data-page="5"]');
+
+                    setTimeout(function() {
+                        $previousPage.hide();
+                        $targetPage.fadeIn('slow');
+
+                        $('#user-first-name').html(userName);
+                        $('.thank-you-message').addClass('animated fadeInRight');
+
+                        $('.first').html('Claim Completed');
+                        $('#progress').css('width', '100%');
+                        window.location.hash = '5';
+                    }, 2000);
+                }
+            );
+        }
+    });
+
+    $main.on('click', '.dismiss', function(e) {
+        e.preventDefault();
+        dismissCard();
+    });
+
     var formTimeout,
-        duration = 800;
+        duration = 1000,
+        stringValidation = /^[a-zA-Z]+$/,
+        numberValidation = /^[0-9]+$/,
+        phoneValidation = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/,
+        emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        dateValidation = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
+        
+    var $error = $('#error-message');
+
+    function hideError($el) {
+        $el.css('border-bottom', '1px dotted #ced2d8');
+        $error.html('');
+        $error.hide();
+    }
+
+    function renderError($el, message) {
+        $el.css('border-bottom', '1px dotted red');
+        $error.html(message);
+        $error.fadeIn('slow');
+    }
+
+    function isValidForm() {
+        var $name = $('#user-name'),
+            nameValue = $name.val(),
+            validName = false,
+            $phone = $('#user-phone'),
+            phoneValue = $phone.val(),
+            validPhone = false,
+            $email = $('#user-email'),
+            emailValue = $email.val(),
+            validEmail = false,
+            $zip = $('#user-zip'),
+            zipValue = $zip.val(),
+            validZip = false,
+            $date = $('#user-travel-date'),
+            dateValue = $date.val(),
+            validDate = false,
+            errorMessage = 'Please correct the errors below';
+
+        if (nameValue.match(stringValidation)) {
+            validName = true;
+        } else {
+            renderError($name, errorMessage);
+        }
+        if (phoneValue.match(phoneValidation)) {
+            validPhone = true;
+        } else {
+            renderError($phone, errorMessage);
+        }
+        if (emailValue.match(emailValidation)) {
+            validEmail = true;
+        } else {
+            renderError($email, errorMessage);
+        }
+        if (zipValue.match(numberValidation) && zipValue.length == 5) {
+            validZip = true;
+        } else {
+            renderError($zip, errorMessage);
+        }
+        if (dateValue.match(dateValidation)) {
+            validDate = true;
+        } else {
+            renderError($date, errorMessage);
+        }
+
+        if (validName && validPhone && validEmail && validZip && validDate) {
+            return true;
+        } else {
+            $name.on('input', function() { hideError($name) });
+            $phone.on('input', function() { hideError($phone) });
+            $email.on('input', function() { hideError($email) });
+            $zip.on('input', function() { hideError($zip) });
+            $date.on('input', function() { hideError($date) });
+        }
+        return false;
+    }  
+
     function renderPhoneSection(e) {
-        var $targetInput = $('.form-section[data-section="2"]');
+        var $targetInput = $('.form-section[data-section="2"]'),
+            $name = $('#user-name'),
+            nameValue = $name.val();
+
+        hideError($name);
 
         if (formTimeout) { 
             clearTimeout(formTimeout); 
         }
 
         formTimeout = setTimeout(function() {
-            $targetInput.fadeIn('slow');
-            $targetInput.find('input').focus();
+            if (nameValue.match(stringValidation)) {
+                $targetInput.fadeIn('slow');
+                $targetInput.find('input').focus();
+            } else {
+                renderError($name, 'Please enter a name with just characters');
+            }
             formTimeout = undefined;
         }, duration);
     }
 
     function renderEmailSection(e) {
-        var $targetInput = $('.form-section[data-section="3"]');
+        var $targetInput = $('.form-section[data-section="3"]'),
+            $phone = $('#user-phone'),
+            phoneValue = $phone.val();
+            
         $main.undelegate('#user-name', 'input', renderPhoneSection);
+
+        hideError($phone);
 
         if (formTimeout) { 
             clearTimeout(formTimeout); 
         }
 
         formTimeout = setTimeout(function() {
-            $targetInput.fadeIn('slow');
-            $targetInput.find('input').focus();
+            if (phoneValue.match(phoneValidation)) {
+                $targetInput.fadeIn('slow');
+                $targetInput.find('input').focus();
+            } else {
+                renderError($phone, 'Please enter a valid phone number');
+            }
             formTimeout = undefined;
         }, duration);
     }
 
     function renderAddressSection(e) {
-        var $targetInput = $('.form-section[data-section="4"]');
+        var $targetInput = $('.form-section[data-section="4"]'),
+            $email = $('#user-email'),
+            emailValue = $email.val();
+            
         $main.undelegate('#user-phone', 'input', renderEmailSection);
+
+        hideError($email);
 
         if (formTimeout) { 
             clearTimeout(formTimeout); 
         }
 
         formTimeout = setTimeout(function() {
-            $targetInput.fadeIn('slow');
-            $targetInput.find('#user-street-address').focus();
+            if (emailValue.match(emailValidation)) {
+                $targetInput.fadeIn('slow');
+                $targetInput.find('#user-street-address').focus();
+            } else {
+                renderError($email, 'Please enter a valid email address');
+            }
             formTimeout = undefined;
         }, duration);
     }
 
     function renderDateSection(e) {
-        var $targetInput = $('.form-section[data-section="5"]');
+        var $targetInput = $('.form-section[data-section="5"]'),
+            $zip = $('#user-zip'),
+            zipValue = $zip.val();
+            
         $main.undelegate('#user-zip', 'input', renderTransportSection);
+
+        hideError($zip);
 
         if (formTimeout) { 
             clearTimeout(formTimeout); 
         }
 
         formTimeout = setTimeout(function() {
-            $targetInput.fadeIn('slow');
-            $targetInput.find('input').focus();
+            if (zipValue.match(numberValidation) && zipValue.length == 5) {
+                $targetInput.fadeIn('slow');
+                $targetInput.find('input').focus();
+            } else {
+                renderError($zip, 'Please enter only digits for Zip Code');
+            }
             formTimeout = undefined;
         }, duration);
     }
 
     function renderTransportSection(e) {
-        var $targetInput = $('.form-section[data-section="6"]');
+        var $targetInput = $('.form-section[data-section="6"]'),
+            $date = $('#user-travel-date'),
+            dateValue = $date.val();
+
+        hideError($date);
 
         if (formTimeout) { 
             clearTimeout(formTimeout); 
         }
 
         formTimeout = setTimeout(function() {
-            $targetInput.fadeIn('slow');
-            $targetInput.css('display', 'inline-block');
-            $targetInput.find('select').focus();
+            if (dateValue.match(dateValidation)) {
+                $targetInput.fadeIn('slow');
+                $targetInput.css('display', 'inline-block');
+                $targetInput.find('select').focus();
+            } else {
+                renderError($date, 'Enter a valid date: MM/DD/YYYY');
+            }
             formTimeout = undefined;
         }, duration);
     }
@@ -397,7 +555,7 @@ $(function() {
         formTimeout = setTimeout(function() {
             $button.fadeIn('slow');
             formTimeout = undefined;
-        }, 1000);
+        }, duration);
     }
 
     $main.on('input', '#user-street-address', function(e) {
@@ -411,37 +569,8 @@ $(function() {
     $main.delegate('#user-travel-date', 'input', renderTransportSection);
     $main.delegate('#user-transport', 'change', renderSubmitButton);
 
-    $main.on('click', '.submit-claim', function(e) {
-        e.preventDefault();
-        var $targetPage = $('.page[data-page="5"]'),
-            $previousPage = $('.page[data-page="4"]'),
-            userName = $('#user-name').val().split(' ')[0];
-
-        $('#user-form').addClass('fadeOutLeft');
-        $('#user-form').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-            function() {
-                $previousPage.hide();
-                $targetPage.show();
-                initSpinner();
-                $('.first').html('Sending claim...');
-
-                $targetPage = $('.page[data-page="6"]');
-                $previousPage = $('.page[data-page="5"]');
-
-                setTimeout(function() {
-                    $previousPage.hide();
-                    $targetPage.fadeIn('slow');
-
-                    $('#user-first-name').html(userName);
-                    $('.thank-you-message').addClass('animated fadeInRight');
-
-                    $('.first').html('Claim Completed');
-                    $('#progress').css('width', '100%');
-                    window.location.hash = '5';
-                }, 2000);
-            }
-        );
-    });
+    $('.card-container').addClass('animated bounceInRight');
+    $('.nav-link').addClass('animated bounceInLeft');
 
     function initSpinner() {
         var target  = document.getElementById('loading-spinner'),
@@ -458,14 +587,6 @@ $(function() {
             },
             spinner = new Spinner(opts).spin(target);
     }
-
-    $main.on('click', '.dismiss', function(e) {
-        e.preventDefault();
-        dismissCard();
-    });
-
-    $('.card-container').addClass('animated bounceInRight');
-    $('.nav-link').addClass('animated bounceInLeft');
 
     function setPage(newPage, isBack) {
         if (newPage === 1) {
@@ -726,13 +847,13 @@ $(function() {
     ];
 
     /* Instantiate D3 Bubble Chart */
-    d3.json(
-        'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest', 
-        function(data) {
-            var newData = formatCategories(data['categories']);
-            d3.select('#vis').datum(newData).call(plot);
-        }
-    );
-    // var newData = formatCategories(seedData);
-    // d3.select('#vis').datum(newData).call(plot);
+    // d3.json(
+    //     'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest', 
+    //     function(data) {
+    //         var newData = formatCategories(data['categories']);
+    //         d3.select('#vis').datum(newData).call(plot);
+    //     }
+    // );
+    var newData = formatCategories(seedData);
+    d3.select('#vis').datum(newData).call(plot);
 });
