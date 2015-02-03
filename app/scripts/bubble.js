@@ -737,123 +737,123 @@ $(function() {
     /* Render first view */
     setPage(1);
 
-    var seedData = [
-        {
-            categoryName: 'Cell Phones',
-            subCategories: [
-                {
-                    subCategoryName: 'Mobile',
-                    subCategoryCount: 456
-                },
-                {
-                    subCategoryName: 'Home',
-                    subCategoryCount: 783
-                },
-                {
-                    subCategoryName: 'Landline',
-                    subCategoryCount: 456
-                },
-                {
-                    subCategoryName: 'Fax',
-                    subCategoryCount: 456
-                }
-            ]
-        },
-        {
-            categoryName: 'Television',
-            subCategories: [
-                {
-                    subCategoryName: 'LG',
-                    subCategoryCount: 888
-                },
-                {
-                    subCategoryName: 'Samsung',
-                    subCategoryCount: 888
-                },
-                {
-                    subCategoryName: 'Sony',
-                    subCategoryCount: 333
-                },
-                {
-                    subCategoryName: 'Vizio',
-                    subCategoryCount: 456
-                }
-            ]
-        },
-        {
-            categoryName: 'Sports',
-            subCategories: [
-                {
-                    subCategoryName: 'Football',
-                    subCategoryCount: 999
-                },
-                {
-                    subCategoryName: 'Basketball',
-                    subCategoryCount: 111
-                },
-                {
-                    subCategoryName: 'Soccer Ball',
-                    subCategoryCount: 42
-                },
-                {
-                    subCategoryName: 'Cricket Ball',
-                    subCategoryCount: 778
-                }
-            ]
-        },
-        {
-            categoryName: 'Clothing',
-            subCategories: [
-                {
-                    subCategoryName: 'Jeans',
-                    subCategoryCount: 54
-                },
-                {
-                    subCategoryName: 'Shirt',
-                    subCategoryCount: 73
-                },
-                {
-                    subCategoryName: 'Shoes',
-                    subCategoryCount: 111
-                },
-                {
-                    subCategoryName: 'Socks',
-                    subCategoryCount: 556
-                }
-            ]
-        },
-        {
-            categoryName: 'Wallets',
-            subCategories: [
-                {
-                    subCategoryName: 'Purse',
-                    subCategoryCount: 989
-                },
-                {
-                    subCategoryName: 'Murse',
-                    subCategoryCount: 345
-                },
-                {
-                    subCategoryName: 'Wallet',
-                    subCategoryCount: 211
-                },
-                {
-                    subCategoryName: 'Money Clip',
-                    subCategoryCount: 142
-                }
-            ]
-        }
+    // var seedData = [
+    //     {
+    //         categoryName: 'Cell Phones',
+    //         subCategories: [
+    //             {
+    //                 subCategoryName: 'Mobile',
+    //                 subCategoryCount: 456
+    //             },
+    //             {
+    //                 subCategoryName: 'Home',
+    //                 subCategoryCount: 783
+    //             },
+    //             {
+    //                 subCategoryName: 'Landline',
+    //                 subCategoryCount: 456
+    //             },
+    //             {
+    //                 subCategoryName: 'Fax',
+    //                 subCategoryCount: 456
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         categoryName: 'Television',
+    //         subCategories: [
+    //             {
+    //                 subCategoryName: 'LG',
+    //                 subCategoryCount: 888
+    //             },
+    //             {
+    //                 subCategoryName: 'Samsung',
+    //                 subCategoryCount: 888
+    //             },
+    //             {
+    //                 subCategoryName: 'Sony',
+    //                 subCategoryCount: 333
+    //             },
+    //             {
+    //                 subCategoryName: 'Vizio',
+    //                 subCategoryCount: 456
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         categoryName: 'Sports',
+    //         subCategories: [
+    //             {
+    //                 subCategoryName: 'Football',
+    //                 subCategoryCount: 999
+    //             },
+    //             {
+    //                 subCategoryName: 'Basketball',
+    //                 subCategoryCount: 111
+    //             },
+    //             {
+    //                 subCategoryName: 'Soccer Ball',
+    //                 subCategoryCount: 42
+    //             },
+    //             {
+    //                 subCategoryName: 'Cricket Ball',
+    //                 subCategoryCount: 778
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         categoryName: 'Clothing',
+    //         subCategories: [
+    //             {
+    //                 subCategoryName: 'Jeans',
+    //                 subCategoryCount: 54
+    //             },
+    //             {
+    //                 subCategoryName: 'Shirt',
+    //                 subCategoryCount: 73
+    //             },
+    //             {
+    //                 subCategoryName: 'Shoes',
+    //                 subCategoryCount: 111
+    //             },
+    //             {
+    //                 subCategoryName: 'Socks',
+    //                 subCategoryCount: 556
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         categoryName: 'Wallets',
+    //         subCategories: [
+    //             {
+    //                 subCategoryName: 'Purse',
+    //                 subCategoryCount: 989
+    //             },
+    //             {
+    //                 subCategoryName: 'Murse',
+    //                 subCategoryCount: 345
+    //             },
+    //             {
+    //                 subCategoryName: 'Wallet',
+    //                 subCategoryCount: 211
+    //             },
+    //             {
+    //                 subCategoryName: 'Money Clip',
+    //                 subCategoryCount: 142
+    //             }
+    //         ]
+    //     }
 
-    ];
+    // ];
 
     /* Instantiate D3 Bubble Chart */
-    // d3.json(
-    //     'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest', 
-    //     function(data) {
-    //         var newData = formatCategories(data['categories']);
-    //         d3.select('#vis').datum(newData).call(plot);
-    //     }
-    // );
-    var newData = formatCategories(seedData);
-    d3.select('#vis').datum(newData).call(plot);
+    d3.json(
+        'http://default-environment-8k3maxsvf3.elasticbeanstalk.com/laf/latest', 
+        function(data) {
+            var newData = formatCategories(data['categories']);
+            d3.select('#vis').datum(newData).call(plot);
+        }
+    );
+    // var newData = formatCategories(seedData);
+    // d3.select('#vis').datum(newData).call(plot);
 });
