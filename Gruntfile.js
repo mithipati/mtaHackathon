@@ -118,7 +118,13 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= config.dist %>/*',
-            '!<%= config.dist %>/.git*'
+            '!<%= config.dist %>/.git*',
+            '<%= yeoman.dist %>/*',
+            '!<%= yeoman.dist %>/.git{,*/}*',
+            '!<%= yeoman.dist %>/Procfile',
+            '!<%= yeoman.dist %>/package.json',
+            '!<%= yeoman.dist %>/web.js',
+            '!<%= yeoman.dist %>/node_modules'
           ]
         }]
       },
@@ -285,6 +291,21 @@ module.exports = function (grunt) {
       }
     },
 
+    buildcontrol: {
+      options: {
+          dir: 'dist',
+          commit: true,
+          push: true,
+          message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+      },
+      heroku: {
+          options: {
+              remote: 'https://git.heroku.com/guarded-shore-1849.git',
+              branch: 'master'
+          }
+      }
+    }
+
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
     // wish to use the Usemin blocks.
@@ -418,6 +439,8 @@ module.exports = function (grunt) {
       'mocha'
     ]);
   });
+
+  grunt.registerTask('deploy', ['buildcontrol']);
 
   grunt.registerTask('build', [
     'clean:dist',
