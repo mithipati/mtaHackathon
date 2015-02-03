@@ -118,7 +118,11 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= config.dist %>/*',
-            '!<%= config.dist %>/.git*'
+            '!<%= config.dist %>/.git*',
+            '!<%= config.dist %>/Procfile',
+            '!<%= config.dist %>/package.json',
+            '!<%= config.dist %>/web.js',
+            '!<%= config.dist %>/node_modules'
           ]
         }]
       },
@@ -294,7 +298,7 @@ module.exports = function (grunt) {
       },
       heroku: {
           options: {
-              remote: 'https://git.heroku.com/guarded-shore-1849.git',
+              remote: 'git@heroku.com:guarded-shore-1849.git',
               branch: 'master'
           }
       }
