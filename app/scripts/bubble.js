@@ -351,7 +351,7 @@ $(function() {
 
     var formTimeout,
         duration = 1000,
-        stringValidation = /^[a-zA-Z]+$/,
+        stringValidation = /^([a-zA-Z]+\s)*[a-zA-Z]+$/,
         numberValidation = /^[0-9]+$/,
         phoneValidation = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/,
         emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
