@@ -228,22 +228,63 @@ var bubbles = function() {
 };
 
 $(function() {
-    var $main = $('.main-text'),
+    var $window = $(window),
+        $main = $('.main-text'),
+        $bubbleChart = $('#vis'),
         plot = bubbles(),
         categoryObject = {};
 
     $main.on('click', '.nav-button', function(e) {
-        e.preventDefault();
+        e.preventDefault(); 
         var $targetPage = $('.page[data-page="2"]'),
             $previousPage = $('.page[data-page="1"]');
         $('.welcome-text').addClass('animated fadeOutLeft');
         $('.sub-text').addClass('animated fadeOutLeft');
+
+        var width  = $window.width(),
+            height = $window.height();
+
+        var vis        = $('#vis'),
+            svg        = $bubbleChart.find('svg')[0],
+            $svg       = $bubbleChart.find('svg'),
+            rect       = $bubbleChart.find('rect')[0];
+
+        $svg.css('overflow', 'visible');
+
+        var newWidth,
+            newHeight;
+
+        if (width > 2400) {
+            newWidth = '450px';
+            newHeight = '250px';
+        } else if (width > 2200) {
+            newWidth = '350px';
+            newHeight = '250px';
+        } else if (width > 2000) {
+            newWidth = '250px';
+            newHeight = '200px';
+        } else if (width > 1800) {
+            newWidth = '175px';
+            newHeight = '200px';
+        } else if (width > 1600) {
+            newWidth = '100px';
+            newHeight = '150px';
+        }
+        vis.css('margin-left', newWidth);
+        vis.css('margin-top', newHeight);
+
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', height);
+
         $('.welcome-text').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
             function() {
                 $previousPage.hide();
                 $targetPage.show();
                 $('#vis').addClass('animated fadeInRight');
                 $('.status-text').addClass('animated fadeInRight');
+                $('.disclaimer-message').addClass('animated fadeInUp');
 
                 $('#progress').css('width', '25%');
                 setTimeout(function() {
@@ -264,14 +305,16 @@ $(function() {
 
         $('#vis').addClass('animated fadeOutLeft');
         $('.status-text').addClass('animated fadeOutLeft');
+        $('.disclaimer-message').addClass('animated fadeOutDown');
         $('#vis').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
             function() {
                 $previousPage.hide();
                 $targetPage.show();
                 $('#vis').removeClass('animated fadeInLeft');
+                $('.status-text').removeClass('animated fadeInLeft');
+                $('.disclaimer-message').removeClass('animated fadeInUp');
                 $('.next-button').removeClass('animated fadeInDown');
                 $('.next-button').fadeOut();
-                $('.status-text').removeClass('animated fadeInLeft');
                 $('.card-container').addClass('bounceInRight');
 
                 $('.first').html('2. Choose an item');
@@ -347,6 +390,55 @@ $(function() {
     $main.on('click', '.dismiss', function(e) {
         e.preventDefault();
         dismissCard();
+    });
+
+    $window.resize(function() {
+        var width  = $window.width(),
+            height = $window.height();
+
+        var svg        = $bubbleChart.find('svg')[0],
+            $svg       = $bubbleChart.find('svg'),
+            rect       = $bubbleChart.find('rect')[0],
+            labelNodes = $('.bubble-label');
+
+        // var newPosition;
+
+        // newPosition = width * 0.2;
+
+        // if (width > 1450) {
+        //     $svg.css('padding-left', newPosition + 'px');
+        //     labelNodes.css('margin-left', newPosition + 'px');
+        // }
+        var newWidth,
+            newHeight;
+
+        $svg.css('overflow', 'visible');
+
+        if (width > 2400) {
+            newWidth = '450px';
+            newHeight = '250px';
+        } else if (width > 2200) {
+            newWidth = '350px';
+            newHeight = '250px';
+        } else if (width > 2000) {
+            newWidth = '250px';
+            newHeight = '200px';
+        } else if (width > 1800) {
+            newWidth = '175px';
+            newHeight = '200px';
+        } else if (width > 1600) {
+            newWidth = '100px';
+            newHeight = '150px';
+        }
+        vis.css('margin-left', newWidth);
+        vis.css('margin-top', newHeight);
+        labelNodes.css('margin-left', newWidth);
+
+
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', height);
     });
 
     var formTimeout,
@@ -583,7 +675,8 @@ $(function() {
                 direction: 1,
                 color: '#FF9900',
                 width: 10,
-                length: 20
+                length: 20,
+                top: '40%'
             },
             spinner = new Spinner(opts).spin(target);
     }
@@ -654,8 +747,10 @@ $(function() {
         $('.card-container').addClass('animated bounceOutRight');
         $('#vis').removeClass('animated fadeOutLeft');
         $('.status-text').removeClass('animated fadeOutLeft');
+        $('.disclaimer-message').removeClass('animated fadeOutDown');
         $('#vis').removeClass('animated fadeInRight');
         $('.status-text').removeClass('animated fadeInRight');
+        $('.disclaimer-message').removeClass('animated fadeInUp');
 
         $('.card-container').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
             function() {
@@ -665,6 +760,7 @@ $(function() {
                 $('.card-container').removeClass('bounceOutRight');
                 $('#vis').addClass('animated fadeInLeft');
                 $('.status-text').addClass('animated fadeInLeft');
+                $('.disclaimer-message').addClass('animated fadeInUp');
 
                 $('.first').html('1. Choose a category');
                 $('#progress').css('width', '25%');

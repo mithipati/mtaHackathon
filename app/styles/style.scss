@@ -84,7 +84,20 @@ nav {
 .status-text {
   font-size: 40px;
   color: $accent;
+}
 
+.disclaimer-message {
+  position: absolute;
+  bottom: 20px;
+  width: 300px;
+  left: 50%;
+  margin-left: -150px;
+
+  small {
+    font-size: 10px;
+    font-weight: 300;
+    color: $accent;
+  }
 }
 
 .view-card {
@@ -108,7 +121,7 @@ nav {
 .card-container {
   position: absolute;
   width: 400px;
-  top: 50%;
+  top: 40%;
   left: 50%;
   margin: -250px 0px 100px -200px;
   padding: 30px;
